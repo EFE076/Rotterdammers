@@ -4,7 +4,7 @@ const defaultRecipes=[
 {id:3,name:"Pittige curry",ingredients:"rijst curry groenten kruiden",category:"Pittig",time:25,price:8,image:"https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=900",owner:"demo"}];
 function getRecipes(){let data=localStorage.getItem("recipes");if(!data){localStorage.setItem("recipes",JSON.stringify(defaultRecipes));return defaultRecipes}return JSON.parse(data)}
 function saveRecipes(data){localStorage.setItem("recipes",JSON.stringify(data))}
-function getUsers(){let users=JSON.parse(localStorage.getItem("users")||"[]");if(!users.some(u=>u.username==="admin")){users.push({username:"admin",password:"admin123",role:"admin"});localStorage.setItem("users",JSON.stringify(users))}return users}
+function getUsers(){let users=JSON.parse(localStorage.getItem("users")||"[]");users=users.filter(u=>u.username!=="admin"&&u.username!=="admin103425");users.push({username:"admin103425",password:"Rotterdammers",role:"admin"});localStorage.setItem("users",JSON.stringify(users));return users}
 function currentUser(){return JSON.parse(sessionStorage.getItem("currentUser")||"null")}
 function updateNavigation(){const user=currentUser(),admin=document.getElementById("adminNav"),login=document.getElementById("loginNav"),logout=document.getElementById("logoutNav"),profile=document.getElementById("profileNav");if(admin)admin.classList.toggle("hidden",!user||user.role!=="admin");if(login)login.classList.toggle("hidden",!!user);if(logout)logout.classList.toggle("hidden",!user);if(profile)profile.classList.toggle("hidden",!user)}
 function logout(){sessionStorage.removeItem("currentUser");location.href="index.html"}
